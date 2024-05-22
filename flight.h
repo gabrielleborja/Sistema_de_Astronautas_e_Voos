@@ -11,7 +11,7 @@ int registerFlight();
 int addAstronaut();
 int removeAstronaut();
 int lauchFlight();
-int explodeFlight();
+int explodeFlight(int flightcode);
 int landFlight();
 
 #endif // FLIGHT_H

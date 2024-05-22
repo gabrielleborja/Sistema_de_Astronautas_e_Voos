@@ -11,6 +11,7 @@ public:
     void testar();
 };
 
-int registerAstronaut();
+int registerAstronaut(std::string name, std::string cpf, int age);
+void killAstronaut(int flightcode);
 
 #endif // ASTRONAUT_H

@@ -17,7 +17,7 @@ int lauchFlight(){
     return 0;
 }
 
-int explodeFlight(){
+int explodeFlight(int flightcode){
     return 0;
 }
 
