@@ -1,31 +1,53 @@
 #include "flight.h"
 #include <iostream>
+#include <vector>
 
-int registerFlight(){
-    return 0;
+Flight::Flight(int flightCode){
+    this->flightCode=flightCode;
 }
 
-int addAstronaut(){
-    return 0;
+void registerF(std::vector<Flight> &flightsList){
+    int code;
+    std::cout << "++++ Cadastro de Novo Voo ++++" << std::endl;
+    std::cout << "Digite o código: ";
+    std::cin >> code;
+    Flight flight(code);
+    flightsList.push_back(flight);
 }
 
-int removeAstronaut(){
-    return 0;
-}
+// int Flight::getFlightCode() {
+//     return flightCode;
+// }
 
-int lauchFlight(){
-    return 0;
-}
+// void Flight::setFlightCode(int code) {
+//     if (code < 0) { 
+//         // 
+//     }
 
-int explodeFlight(int flightcode){
-    return 0;
-}
+//     flightCode = code;
+// }
 
-int landFlight(){
-    return 0;
-}
+// int Flight::registerFlight(){
+//     return 0;
+// }
 
-void Flight :: teste(){
-    std::cout << "voo ok"<< '\n';
-    
-}
+// int addAstronaut(){
+//     return 0;
+// }
+
+// int removeAstronaut(){
+//     return 0;
+// }
+
+// int lauchFlight(){
+//     return 0;
+// }
+
+// int explodeFlight(int flightcode){
+//     return 0;
+// }
+
+// int landFlight(){
+//     return 0;
+// }
+
