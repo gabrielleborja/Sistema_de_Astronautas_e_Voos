@@ -5,51 +5,36 @@
 #include <string>
 #include "astronaut.h"
 
+class Astronaut;
+
 class Flight {
 private:
    int flightCode;
    int situation;
-   std::vector<std::string> passengersList;
 
 public:
-   int getFlightCode();
+   int getFlightCode() const;
    void setFlightCode(int flightCode);
+   int getSituation();
+   std::vector<Astronaut *> getPassengersList();
+   std::vector<Astronaut *> passengersList;
 
-   Flight(int code, int situation, std::vector<std::string> passengerList);
-
-   void printInfo() const {
-        std::cout << "\nCódigo de voo: " << flightCode<< ", Situação: ";
-
-        switch (situation)
-        {
-        case 0:
-            std::cout << "Livre, ";
-            break;
-        case 1: 
-            std::cout << "Ocupado, ";
-            break;
-        case 2:
-            std::cout << "Morto, ";
-            break;
-        default:
-            break;
-        }
-        std::cout << "Lista de passageiros: | ";
-        for (int i; i<passengersList.size(); i++){
-         std::cout << passengersList[i] << " | ";
-        }
-        std::cout << "\n";
-    }
+   Flight(int code, int situation, std::vector<Astronaut *> passengersList);
 
 // auto f = new Flight();
 // f.registerFlight();
+void printInfo();
+void setSituation(int n);
 
-int addAstronaut();
-int removeAstronaut();
-int lauchFlight();
-int explodeFlight(int flightcode);
-int landFlight();
+
 };
 
-void registerF(std::vector<Astronaut> astronautsList, std::vector<Flight> flightList);
+//extern std::vector<Flight *> flightsList;
+
+int removeAstronaut();
+int launchFlight();
+int explodeFlight();
+int landFlight();
+int addPassenger(Astronaut* astronaut);
+void registerF();
 #endif // FLIGHT_H

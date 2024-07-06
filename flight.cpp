@@ -1,17 +1,56 @@
 #include "flight.h"
-#include "menu.h"
 #include "astronaut.h"
 #include <iostream>
 #include <vector>
 #include <limits>
 
-Flight::Flight(int flightCode, int situation, std::vector<std::string> passengersList){
-    this->flightCode=flightCode;
-    this->situation=situation;
-    this->passengersList=passengersList;
+std::vector<Flight *> flightsList;
+
+Flight::Flight(int flightCode, int situation, std::vector<Astronaut *> passengersList)
+    :flightCode(flightCode), situation(situation), passengersList(passengersList){}
+
+int Flight::getFlightCode() const {
+    return flightCode;
 }
 
-void registerF(std::vector<Astronaut> astronautsList, std::vector<Flight> flightsList){
+int Flight::getSituation(){
+    return situation;
+}
+void Flight::setSituation(int n){
+    if (n>=0 && n<=2){
+        situation = n;
+    }
+}
+
+std::vector<Astronaut *> Flight::getPassengersList(){
+    return passengersList;
+}
+
+void Flight::printInfo() {
+        std::cout << "\nCódigo de voo: " << flightCode << ", Situação: ";
+
+        switch (situation)
+        {
+        case 0:
+            std::cout << "Em planejamento, ";
+            break;
+        case 1: 
+            std::cout << "Em viagem, ";
+            break;
+        case 2:
+            std::cout << "Explodido, ";
+            break;
+        default:
+            break;
+        }
+        std::cout << "Lista de passageiros: | ";
+        for (Astronaut *passenger : passengersList){
+            std::cout << passenger << " | ";
+        }
+        std::cout << "\n";
+    }
+
+void registerF(){
     int code;
     std::cout << "++++ Cadastro de Novo Voo ++++" << std::endl;
     while (true) {
@@ -26,53 +65,135 @@ void registerF(std::vector<Astronaut> astronautsList, std::vector<Flight> flight
         }
     }
     int situation = 0;
-    std::vector<std::string> passengersList;
-    Flight flight(code, situation, passengersList);
-    flightsList.push_back(flight);
-
+    std::vector<Astronaut *> passengersList;
+    flightsList.push_back(new Flight(code, situation, passengersList));
     std::cout << "Lista atualizada de voos: ";
-    for (int i=0; i<flightsList.size(); i++){
-        flightsList[i].printInfo();
+    for (Flight *flight : flightsList){
+        flight->printInfo();
     }
-    menu(astronautsList, flightsList);
     
 }
 
-// int addAstronaut(){
-//     \\
-// }
+int addPassenger(Astronaut* astronaut){
+    if(astronaut = nullptr){
+        std::cout << "Desculpe! CPF inválido.\n";
+    }
+    int flightCode;
+    std::cout << "Digite o código do voo: ";
+    std::cin >> flightCode;
+    Flight *flight = nullptr;
+    for(Flight *temp : flightsList){
+        if(temp->getFlightCode() == flightCode){
+            flight = temp;
+            temp->getPassengersList().push_back(astronaut);
+            std::cout << "Passageiro cadastrado ao voo!\n";
+            std::cout << astronaut->getName();
+        }
+        else{
+            std::cout << "Desculpe! Código de voo inválido.\n";
+        }
+    }
+    return 0;
+}
 
-// int Flight::getFlightCode() {
-//     return flightCode;
-// }
-
-// void Flight::setFlightCode(int code) {
-//     if (code < 0) { 
-//         // 
+// int removePassenger(){
+//     std::string cpf;
+//     int flightCode;
+//     std::cout << "Digite o cpf do astronauta: ";
+//     std::cin >> cpf;
+//     Astronaut *astronaut = nullptr;
+//     // for(Astronaut *temp : astronautsList){
+//     //     if(temp->getCpf() == cpf){
+//     //         astronaut = temp;
+//     //         break;
+//     //     }
+    
+//     if(astronaut = nullptr){
+//         std::cout << "Desculpe! CPF inválido.\n";
 //     }
+//     else{
+//         std::cout << "Digite o código do voo: ";
+//         std::cin >> flightCode;
+//         Flight *flight = nullptr;
+//         for(Flight *temp : flightsList){
+//             if(temp->getFlightCode() == flightCode){
+//                 flight = temp;
+//                 temp->getPassengersList().push_back(astronaut);
+//                 std::cout << "Passageiro cadastrado ao voo!\n";
+//             }
+//             else{
+//                 std::cout << "Desculpe! Código de voo inválido.\n";
+//             }
+//         }
+//     }
+    
 
-//     flightCode = code;
-// }
-
-// int Flight::registerFlight(){
 //     return 0;
 // }
 
 
+int launchFlight(){
+    int flightCode;
+    std::cout << "Digite o código do voo: ";
+    std::cin >> flightCode;
+    Flight *flight = nullptr;
+    for(Flight *temp : flightsList){
+        if(temp->getFlightCode() == flightCode){
+            flight = temp;
+            if(flight->getSituation()==0){
+                flight->setSituation(1);
+                for(Astronaut *temp : flight->getPassengersList()){
+                    temp->setSituation(1);
+                }
+            }
+            std::cout << "Vou decolou em segurança!\n";
+            break;
+        }
+    }
+    return 0;
+}
 
-// int removeAstronaut(){
-//     return 0;
-// }
 
-// int lauchFlight(){
-//     return 0;
-// }
+int explodeFlight(){
+    int flightCode;
+    std::cout << "Digite o código do voo: ";
+    std::cin >> flightCode;
+    Flight *flight = nullptr;
+    for(Flight *temp : flightsList){
+        if(temp->getFlightCode() == flightCode){
+            flight = temp;
+            if(flight->getSituation()==1){
+                flight->setSituation(2);
+                for(Astronaut *temp : flight->getPassengersList()){
+                    temp->setSituation(2);
+                }
+            }
+            std::cout << "Voo explodido.\n";
+            break;
+        }
+    }
 
-// int explodeFlight(int flightcode){
-//     return 0;
-// }
+    return 0;
+}
 
-// int landFlight(){
-//     return 0;
-// }
+int landFlight(){
+    int flightCode;
+    std::cout << "Digite o código do voo: ";
+    std::cin >> flightCode;
+    Flight *flight = nullptr;
+    for(Flight *temp : flightsList){
+        if(temp->getFlightCode() == flightCode){
+            flight = temp;
+            if(flight->getSituation()==1){
+                flight->setSituation(0);
+                for(Astronaut *temp : flight->getPassengersList()){
+                    temp->setSituation(0);
+                }
+            }
+            std::cout << "Voo aterrissou em segurança!\n";
+            break;
+        }
+    }
+    return 0;
+}
 

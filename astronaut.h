@@ -2,9 +2,9 @@
 #define ASTRONAUT_H
 #include <iostream>
 #include <vector>
+#include "flight.h"
 
-
-
+class Flight;
 
 class Astronaut {
 private:
@@ -13,34 +13,21 @@ private:
     std::string cpf;
     int situation;   
 public:
+    Astronaut(): name(""), age(0), cpf(""), situation(0){}
     // Construtor
-    Astronaut(std::string name, int age, std::string cpf, int situation);
+    Astronaut(std::string &name, int age, std::string &cpf, int situation);
 
-    //Método para imprimir os detalhes da pessoa
-    void printInfo() const {
-        std::cout << "\nNome: " << name << ", Idade: " << age << ", CPF: " << cpf << ", Situação: ";
-
-        switch (situation)
-        {
-        case 0:
-            std::cout << "Livre";
-            break;
-        case 1: 
-            std::cout << "Ocupado";
-            break;
-        case 2:
-            std::cout << "Morto";
-            break;
-        default:
-            break;
-        }
-        std::cout << "\n";
-    }
-    int getAstronautName(Astronaut);
+    const std::string &getName() const;
+    int getAge() const;
+    int getSituation();
+    void setSituation(int n);
+    const std::string &getCpf() const;
+   
+    void printInfo(); 
     void killAstronaut(int flightcode);
 };
-
-    
-void registerA(std::vector<Astronaut> astronautList);
+//extern std::vector<Astronaut *> astronautsList;
+ Astronaut* passengerTest();
+ void registerA();
 
 #endif // ASTRONAUT_H
