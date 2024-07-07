@@ -17,14 +17,15 @@ int Flight::getSituation(){
     return situation;
 }
 void Flight::setSituation(int n){
-    if (n>=0 && n<=2){
         situation = n;
-    }
 }
+
 
 std::vector<Astronaut *> Flight::getPassengersList(){
     return passengersList;
 }
+
+
 
 void Flight::printInfo() {
         std::cout << "\nCódigo de voo: " << flightCode << ", Situação: ";
@@ -39,6 +40,9 @@ void Flight::printInfo() {
             break;
         case 2:
             std::cout << "Explodido, ";
+            break;
+        case 3:
+            std::cout << "Finalizado, ";
             break;
         default:
             break;
@@ -140,6 +144,10 @@ int launchFlight(){
     for(Flight *temp : flightsList){
         if(temp->getFlightCode() == flightCode){
             flight = temp;
+            if(flight->getPassengersList().empty()){
+                std::cout << "Voo sem astronautas não pode ser lançado.\n";
+                return 0;
+            }
             if(flight->getSituation()==0){
                 flight->setSituation(1);
                 for(Astronaut *temp : flight->getPassengersList()){
@@ -185,12 +193,13 @@ int landFlight(){
         if(temp->getFlightCode() == flightCode){
             flight = temp;
             if(flight->getSituation()==1){
-                flight->setSituation(0);
+                flight->setSituation(3);
                 for(Astronaut *temp : flight->getPassengersList()){
-                    temp->setSituation(0);
+                    temp->setSituation(3);
                 }
+                std::cout << "Voo aterrissou em segurança!\n";
             }
-            std::cout << "Voo aterrissou em segurança!\n";
+            
             break;
         }
     }
