@@ -33,23 +33,19 @@ void Flight::printInfo() {
         switch (situation)
         {
         case 0:
-            std::cout << "Em planejamento, ";
+            std::cout << "Em planejamento ";
             break;
         case 1: 
-            std::cout << "Em viagem, ";
+            std::cout << "Em viagem ";
             break;
         case 2:
-            std::cout << "Explodido, ";
+            std::cout << "Explodido ";
             break;
         case 3:
-            std::cout << "Finalizado, ";
+            std::cout << "Finalizado ";
             break;
         default:
             break;
-        }
-        std::cout << "Lista de passageiros: | ";
-        for (Astronaut *passenger : passengersList){
-            std::cout << passenger << " | ";
         }
         std::cout << "\n";
     }
@@ -83,55 +79,49 @@ int addPassenger(Astronaut* astronaut){
         std::cout << "Desculpe! CPF inválido.\n";
     }
     int flightCode;
+    int i = 0;
     std::cout << "Digite o código do voo: ";
     std::cin >> flightCode;
     Flight *flight = nullptr;
     for(Flight *temp : flightsList){
         if(temp->getFlightCode() == flightCode){
+            i = 1;
             flight = temp;
             temp->getPassengersList().push_back(astronaut);
             std::cout << "Passageiro cadastrado ao voo!\n";
-            std::cout << astronaut->getName();
+            break;
         }
-        else{
+        if(int i = 0){
             std::cout << "Desculpe! Código de voo inválido.\n";
         }
     }
     return 0;
 }
 
-// int removePassenger(){
-//     std::string cpf;
-//     int flightCode;
-//     std::cout << "Digite o cpf do astronauta: ";
-//     std::cin >> cpf;
-//     Astronaut *astronaut = nullptr;
-//     // for(Astronaut *temp : astronautsList){
-//     //     if(temp->getCpf() == cpf){
-//     //         astronaut = temp;
-//     //         break;
-//     //     }
-    
+//  int removeAstronaut(Astronaut* astronaut){
 //     if(astronaut = nullptr){
 //         std::cout << "Desculpe! CPF inválido.\n";
 //     }
-//     else{
-//         std::cout << "Digite o código do voo: ";
-//         std::cin >> flightCode;
-//         Flight *flight = nullptr;
-//         for(Flight *temp : flightsList){
-//             if(temp->getFlightCode() == flightCode){
-//                 flight = temp;
-//                 temp->getPassengersList().push_back(astronaut);
-//                 std::cout << "Passageiro cadastrado ao voo!\n";
-//             }
-//             else{
-//                 std::cout << "Desculpe! Código de voo inválido.\n";
+//     int flightCode;
+//     std::cout << "Digite o código do voo: ";
+//     std::cin >> flightCode;
+//     Flight *flight = nullptr;
+//     for(Flight *temp : flightsList){
+//         if(temp->getFlightCode() == flightCode){
+//             flight = temp;
+//             for (auto it = flight->getPassengersList().begin(); it != flight->getPassengersList().end(); ++it) {
+//                 if ((*it)->getCpf() == astronaut->getCpf()) {
+//                     flight->getPassengersList().erase(it);
+//                     return 0;
+//                 }
+//                 std::cout << "Passageiro removido do voo!\n";
+//                 break;
 //             }
 //         }
+//         else{
+//             std::cout << "Desculpe! Código de voo inválido.\n";
+//         }
 //     }
-    
-
 //     return 0;
 // }
 
@@ -144,10 +134,10 @@ int launchFlight(){
     for(Flight *temp : flightsList){
         if(temp->getFlightCode() == flightCode){
             flight = temp;
-            if(flight->getPassengersList().empty()){
-                std::cout << "Voo sem astronautas não pode ser lançado.\n";
-                return 0;
-            }
+            // if(flight->getPassengersList().empty()){
+            //     std::cout << "Voo sem astronautas não pode ser lançado.\n";
+            //     return 0;
+            // }
             if(flight->getSituation()==0){
                 flight->setSituation(1);
                 for(Astronaut *temp : flight->getPassengersList()){
@@ -206,3 +196,8 @@ int landFlight(){
     return 0;
 }
 
+void listAllFlights(){
+    for (Flight *flight : flightsList){
+        flight->printInfo();
+    }
+}

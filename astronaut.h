@@ -26,7 +26,6 @@ public:
     void printInfo(); 
     void killAstronaut(int flightcode);
 };
-//extern std::vector<Astronaut *> astronautsList;
  Astronaut* passengerTest();
  void registerA();
 

@@ -21,20 +21,17 @@ public:
 
    Flight(int code, int situation, std::vector<Astronaut *> passengersList);
 
-// auto f = new Flight();
-// f.registerFlight();
 void printInfo();
 void setSituation(int n);
 
 
 };
 
-//extern std::vector<Flight *> flightsList;
-
-int removeAstronaut();
+//int removeAstronaut(Astronaut* astronaut);
 int launchFlight();
 int explodeFlight();
 int landFlight();
 int addPassenger(Astronaut* astronaut);
 void registerF();
+void listAllFlights();
 #endif // FLIGHT_H

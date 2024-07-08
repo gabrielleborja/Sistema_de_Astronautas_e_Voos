@@ -5,8 +5,6 @@
 
 
 int main(){  
-    //std::vector<Astronaut *> astronautsList;
-    //std::vector<Flight *> flightsList;
         int choiceInput=0;
         Astronaut* astronaut;
         while((choiceInput>=0 && choiceInput<10)){
@@ -20,7 +18,6 @@ int main(){
             std::cout << "|  6  - Explodir voo                  |" << std::endl;
             std::cout << "|  7  - Finalizar voo                 |" << std::endl;
             std::cout << "|  8  - Listar todos os voos          |" << std::endl;
-            std::cout << "|  9  - Listar astronautas mortos     |" << std::endl;
             std::cout << "|  Qualquer outro número para Sair    |" << std::endl;
             std::cout << "+++++++++++++++++++++++++++++++++++++++" << std::endl;
             std::cin >> choiceInput;
@@ -36,7 +33,8 @@ int main(){
                     addPassenger(astronaut);
                     break;
                 case 4:
-                    //removeflight();
+                    astronaut = passengerTest();
+                    //removeAstronaut(astronaut);
                     break;
                 case 5:
                     launchFlight();
@@ -48,10 +46,7 @@ int main(){
                     landFlight();
                     break;
                 case 8:
-                    //listAllFlights();
-                    break;
-                case 9:
-                    //listDeadAstronausts();
+                    listAllFlights();
                     break;
                 default:
                     break;
