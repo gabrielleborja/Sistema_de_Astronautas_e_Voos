@@ -5,9 +5,9 @@
 Este projeto é um sistema de gerenciamento de voos e astronautas, desenvolvido em C++. O objetivo é permitir a criação e o gerenciamento de voos espaciais, incluindo o cadastro de astronautas, a adição de astronautas a voos, e o gerenciamento do estado dos voos.
 
 ## Estrutura:
-    main.cpp: Contém a função principal que executa o menu de opções.
-    flight.h e flight.cpp: Definem e implementam a classe Flight, responsável pela gestão dos voos.
-    astronaut.h e astronaut.cpp: Definem e implementam a classe Astronaut, responsável pela gestão dos astronautas.
+- main.cpp: Contém a função principal que executa o menu de opções.
+- flight.h e flight.cpp: Definem e implementam a classe Flight, responsável pela gestão dos voos.
+- astronaut.h e astronaut.cpp: Definem e implementam a classe Astronaut, responsável pela gestão dos astronautas.
     
 ## Funções:
   - Cadastrar novo astronauta: Permite cadastrar um novo astronauta no sistema.
